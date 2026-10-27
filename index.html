@@ -103,9 +103,13 @@
       history.pushState(null, "", "#" + tabName);
     
       if (tabName === "wearable") {
+        var response = await fetch("last_updated.txt");
+        
+        var updatetime = document.createElement("div");
+        updatetime.textContent = await response.text();
+        content.appendChild(updatetime);
+        
         var response = await fetch("output.txt");
-        document.getElementById("last-updated").textContent =
-            "Last updated: " + new Date().toLocaleString();
         
         var captions = document.createElement("div");
         captions.textContent = await response.text();
