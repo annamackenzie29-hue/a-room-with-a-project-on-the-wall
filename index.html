@@ -48,7 +48,7 @@
     }
 
     .tabcontent img {
-      width: 90vw;
+      width: 100vw;
       max-width: none;
       height: auto;
       display: block;
@@ -95,6 +95,7 @@
       var content = document.getElementById(tabName);
       content.style.display = "block";
       event.currentTarget.classList.add("active");
+      history.pushState(null, "", "#" + tabName);
     
       if (tabName === "wearable") {
         var response = await fetch("wearable_camera_system.txt");
