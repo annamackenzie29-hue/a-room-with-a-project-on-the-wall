@@ -95,42 +95,37 @@
     <img src="Receipt_Merged.png" alt="Output of Plinth">
   </div>
 
-  <script>
-    async function openTab(event, tabName) {
-      var tabs = document.getElementsByClassName("tabcontent");
-      var buttons = document.getElementsByClassName("tablinks");
 
-      for (var i = 0; i < tabs.length; i++) {
-        tabs[i].style.display = "none";
-      }
+<script>
+const url = "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/";
 
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove("active");
-      }
+async function updateCaptions() {
+  const time = await fetch(url + "last_updated.txt?t=" + Date.now()).then(r => r.text());
+  const updated = document.getElementById("last-updated");
 
-      var content = document.getElementById(tabName);
-      content.style.display = "block";
-      event.currentTarget.classList.add("active");
-      history.pushState(null, "", "#" + tabName);
+  if (time.trim() === updated.dataset.time) return;
 
-      if (tabName === "wearable") {
-        var timeResponse = await fetch(
-          "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/last_updated.txt?t=" + Date.now()
-        );
-        document.getElementById("last-updated").textContent =
-          "Last updated: " + await timeResponse.text();
+  const captions = await fetch(url + "output.txt?t=" + Date.now()).then(r => r.text());
 
-        var captionResponse = await fetch(
-          "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/output.txt?t=" + Date.now()
-        );
-        document.getElementById("captions").textContent =
-          await captionResponse.text();
-      }
-    }
+  document.getElementById("captions").textContent = captions;
+  updated.textContent = "Last updated: " + time;
+  updated.dataset.time = time.trim();
+}
 
-    var tab = location.hash === "#plinth" ? "plinth" : "wearable";
-    document.querySelector('[onclick*="' + tab + '"]').click();
-  </script>
+function openTab(event, name) {
+  document.querySelectorAll(".tabcontent").forEach(t => t.style.display = "none");
+  document.querySelectorAll(".tablinks").forEach(b => b.classList.remove("active"));
+
+  document.getElementById(name).style.display = "block";
+  event.currentTarget.classList.add("active");
+
+  if (name === "wearable") updateCaptions();
+}
+
+document.getElementById("defaultOpen").click();
+setInterval(updateCaptions, 60000);
+</script>
+
 
 </body>
 </html>
