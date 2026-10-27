@@ -98,7 +98,7 @@
       history.pushState(null, "", "#" + tabName);
     
       if (tabName === "wearable") {
-        var response = await fetch("wearable_camera_system.txt");
+        var response = await fetch("output.txt");
         content.textContent = await response.text();
       }
     }
