@@ -103,7 +103,8 @@
       }
     }
     
-    document.getElementById("defaultOpen").click();
+    var tab = location.hash === "#plinth" ? "plinth" : "wearable";
+    document.querySelector('[onclick*="' + tab + '"]').click();
 
   </script>
 
