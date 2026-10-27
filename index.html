@@ -38,12 +38,18 @@
 
     .tab button.active {
       background-color: #ddd;
-      border: 1px solid black;
+      border: 2px solid black;
+      padding: 10px;
     }
 
     .tabcontent {
       display: none;
       white-space: pre-wrap;
+    }
+    .tabcontent img {
+      max-width: 100%;
+      height: auto;
+      display: 'block;
     }
   </style>
 </head>
@@ -67,48 +73,33 @@
   </div>
 
   <div id="plinth" class="tabcontent">
-
+    <img src="Recept_Merged.png" alt="Output of Plinth">
   </div>
 
   <script>
 
     async function openTab(event, tabName) {
-    var tabs = document.getElementsByClassName("tabcontent");
-    var buttons = document.getElementsByClassName("tablinks");
-
-    for (var i = 0; i < tabs.length; i++) {
+      var tabs = document.getElementsByClassName("tabcontent");
+      var buttons = document.getElementsByClassName("tablinks");
+    
+      for (var i = 0; i < tabs.length; i++) {
         tabs[i].style.display = "none";
-    }
-
-    for (var i = 0; i < buttons.length; i++) {
+      }
+    
+      for (var i = 0; i < buttons.length; i++) {
         buttons[i].classList.remove("active");
-    }
-
-    var content = document.getElementById(tabName);
-    content.style.display = "block";
-    event.currentTarget.classList.add("active");
-
-    var file;
-
-    if (tabName === "wearable") {
-        file = "wearable_camera_system.txt";
-    } else {
-        file = "recursive_plinth.txt";
-    }
-
-    try {
-        var response = await fetch(file + "?t=" + Date.now());
-
-        if (!response.ok) {
-        throw new Error("Could not load file");
-        }
-
+      }
+    
+      var content = document.getElementById(tabName);
+      content.style.display = "block";
+      event.currentTarget.classList.add("active");
+    
+      if (tabName === "wearable") {
+        var response = await fetch("wearable_camera_system.txt");
         content.textContent = await response.text();
-    } catch (error) {
-        content.textContent = "Could not load text.";
+      }
     }
-    }
-
+    
     document.getElementById("defaultOpen").click();
 
   </script>
