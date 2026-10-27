@@ -2,9 +2,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Website</title>
+  <title>A room with a project on the wall</title>
+
+  <style>
+    body {
+      font-family: monospace;
+      margin: 30px;
+      color: black;
+      background: white;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: normal;
+    }
+
+    .tab {
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    .tab button {
+      font-family: monospace;
+      font-size: 14px;
+      background: none;
+      border: none;
+      padding: 10px 10px 10px 0;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+
+    .tab button.active {
+      text-decoration: underline;
+    }
+
+    .tabcontent {
+      display: none;
+      white-space: pre-wrap;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Hello World</h1>
+
+  <h1>A room with a project on the wall</h1>
+
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'wearable')" id="defaultOpen">
+      wearable_camera_system
+    </button>
+
+    <button class="tablinks" onclick="openTab(event, 'plinth')">
+      recursive_plinth
+    </button>
+  </div>
+
+  <div id="wearable" class="tabcontent">
+    Text for wearable_camera_system.
+  </div>
+
+  <div id="plinth" class="tabcontent">
+    Text for recursive_plinth.
+  </div>
+
+  <script>
+    function openTab(event, tabName) {
+      var tabs = document.getElementsByClassName("tabcontent");
+      var buttons = document.getElementsByClassName("tablinks");
+
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = "none";
+      }
+
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("active");
+      }
+
+      document.getElementById(tabName).style.display = "block";
+      event.currentTarget.classList.add("active");
+    }
+
+    document.getElementById("defaultOpen").click();
+  </script>
+
 </body>
 </html>
