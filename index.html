@@ -20,18 +20,17 @@
       text-align: center;
     }
 
-    h2 {
-      font-size: 25px;
-      font-weight: normal;
-      text-align: center;
+    h1 a {
+      color: black;
+      text-decoration: none;
     }
 
     .tab {
-      margin-bottom: 30px;
-
+      text-align: center;
+      margin-top: 30px;
     }
 
-    .tab button {
+    button {
       font-family: monospace;
       font-size: 25px;
       background: none;
@@ -42,91 +41,24 @@
       color: black;
       -webkit-tap-highlight-color: transparent;
     }
-
-    .tab button.active {
-      border: 2px solid black;
-    }
-
-    .tabcontent {
-      display: none;
-      white-space: pre-wrap;
-      text-align: center;
-    }
-
-    #last-updated {
-      font-size: 14px;
-      margin-bottom: 25px;
-      text-align: left;
-    }
-
-    #captions {
-      text-align: left;
-    }
-
-    .tabcontent img {
-      width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
   </style>
 </head>
 
 <body>
 
-  <h1>A ROOM WITH A PROJECT ON THE WALL</h1>
+  <h1>
+    <a href="index.html">A ROOM WITH A PROJECT ON THE WALL</a>
+  </h1>
 
   <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'wearable')" id="defaultOpen">
-      wearable_camera_system
-    </button>
-
-    <button class="tablinks" onclick="openTab(event, 'plinth')">
+    <button onclick="location.href='recursive_plinth.html'">
       recursive_plinth
     </button>
+
+    <button onclick="location.href='captions_live.html'">
+      captions_live
+    </button>
   </div>
-
-  <div id="wearable" class="tabcontent">
-    <h2>(an image of a poem in the language of a poem)</h2>
-    <p id="last-updated">Last updated: loading...</p>
-    <div id="captions"></div>
-  </div>
-
-  <div id="plinth" class="tabcontent">
-    <img src="Receipt_Merged.png" alt="Output of Plinth">
-  </div>
-
-
-<script>
-const url = "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/";
-
-async function updateCaptions() {
-  const time = await fetch(url + "last_updated.txt?t=" + Date.now()).then(r => r.text());
-  const updated = document.getElementById("last-updated");
-
-  if (time.trim() === updated.dataset.time) return;
-
-  const captions = await fetch(url + "output.txt?t=" + Date.now()).then(r => r.text());
-
-  document.getElementById("captions").textContent = captions;
-  updated.textContent = "Last updated: " + time;
-  updated.dataset.time = time.trim();
-}
-
-function openTab(event, name) {
-  document.querySelectorAll(".tabcontent").forEach(t => t.style.display = "none");
-  document.querySelectorAll(".tablinks").forEach(b => b.classList.remove("active"));
-
-  document.getElementById(name).style.display = "block";
-  event.currentTarget.classList.add("active");
-
-  if (name === "wearable") updateCaptions();
-}
-
-document.getElementById("defaultOpen").click();
-setInterval(updateCaptions, 60000);
-</script>
-
 
 </body>
 </html>
