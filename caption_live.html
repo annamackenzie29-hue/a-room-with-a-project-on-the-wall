@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>a room with a project on the wall</title>
+
+  <style>
+    body {
+      font-family: monospace;
+      margin: 20px;
+      color: black;
+      background: white;
+      font-size: 20px;
+      text-align: left;
+    }
+
+    h1 {
+      font-size: 45px;
+      font-weight: normal;
+      text-align: center;
+    }
+
+    h1 a {
+      color: black;
+      text-decoration: none;
+    }
+
+    h2 {
+      font-size: 25px;
+      font-weight: normal;
+      text-align: center;
+    }
+
+    #last-updated {
+      font-size: 14px;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    #captions {
+      text-align: left;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>
+    <a href="index.html">A ROOM WITH A PROJECT ON THE WALL</a>
+  </h1>
+
+  <h2>(an image of a poem in the language of a poem)</h2>
+
+  <p id="last-updated">Last updated: loading...</p>
+
+  <div id="captions"></div>
+
+  <script>
+    const url =
+      "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/";
+
+    async function updateCaptions() {
+      try {
+        const timeResponse = await fetch(
+          url + "last_updated.txt?t=" + Date.now()
+        );
+
+        if (!timeResponse.ok) {
+          throw new Error("Could not load timestamp");
+        }
+
+        const time = await timeResponse.text();
+        const updated = document.getElementById("last-updated");
+
+        if (time.trim() === updated.dataset.time) {
+          return;
+        }
+
+        const captionsResponse = await fetch(
+          url + "output.txt?t=" + Date.now()
+        );
+
+        if (!captionsResponse.ok) {
+          throw new Error("Could not load captions");
+        }
+
+        const captions = await captionsResponse.text();
+
+        document.getElementById("captions").textContent = captions;
+        updated.textContent = "Last updated: " + time.trim();
+        updated.dataset.time = time.trim();
+
+      } catch (error) {
+        console.error("Error updating captions:", error);
+      }
+    }
+
+    updateCaptions();
+    setInterval(updateCaptions, 60000);
+  </script>
+
+</body>
+</html>
