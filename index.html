@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>A room with a project on the wall</title>
+  <title>A ROOM WITH A PROJECT ON THE WALL</title>
 
   <style>
     body {
@@ -71,7 +71,7 @@
   </div>
 
   <div id="wearable" class="tabcontent">
-
+    <p id="last-updated">Last updated: loading...</p>
   </div>
 
   <div id="plinth" class="tabcontent">
@@ -99,7 +99,12 @@
     
       if (tabName === "wearable") {
         var response = await fetch("output.txt");
-        content.textContent = await response.text();
+        document.getElementById("last-updated").textContent =
+            "Last updated: " + new Date().toLocaleString();
+        
+        var captions = document.createElement("div");
+        captions.textContent = await response.text();
+        content.appendChild(captions);
       }
     }
     
