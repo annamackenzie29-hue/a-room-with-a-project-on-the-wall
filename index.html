@@ -14,7 +14,7 @@
     }
 
     h1 {
-      font-size: 40px;
+      font-size: 45px;
       font-weight: normal;
     }
 
@@ -25,7 +25,7 @@
 
     .tab button {
       font-family: monospace;
-      font-size: 20px;
+      font-size: 35px;
       background: none;
       border: none;
       padding: 10px 10px 10px 0;
@@ -36,7 +36,7 @@
     }
 
     .tab button.active {
-      text-decoration: underline;
+      background-color: #ddd;
     }
 
     .tabcontent {
@@ -61,31 +61,54 @@
   </div>
 
   <div id="wearable" class="tabcontent">
-    Text for wearable_camera_system.
+
   </div>
 
   <div id="plinth" class="tabcontent">
-    Text for recursive_plinth.
+
   </div>
 
   <script>
-    function openTab(event, tabName) {
-      var tabs = document.getElementsByClassName("tabcontent");
-      var buttons = document.getElementsByClassName("tablinks");
 
-      for (var i = 0; i < tabs.length; i++) {
+    async function openTab(event, tabName) {
+    var tabs = document.getElementsByClassName("tabcontent");
+    var buttons = document.getElementsByClassName("tablinks");
+
+    for (var i = 0; i < tabs.length; i++) {
         tabs[i].style.display = "none";
-      }
+    }
 
-      for (var i = 0; i < buttons.length; i++) {
+    for (var i = 0; i < buttons.length; i++) {
         buttons[i].classList.remove("active");
-      }
+    }
 
-      document.getElementById(tabName).style.display = "block";
-      event.currentTarget.classList.add("active");
+    var content = document.getElementById(tabName);
+    content.style.display = "block";
+    event.currentTarget.classList.add("active");
+
+    var file;
+
+    if (tabName === "wearable") {
+        file = "wearable_camera_system.txt";
+    } else {
+        file = "recursive_plinth.txt";
+    }
+
+    try {
+        var response = await fetch(file + "?t=" + Date.now());
+
+        if (!response.ok) {
+        throw new Error("Could not load file");
+        }
+
+        content.textContent = await response.text();
+    } catch (error) {
+        content.textContent = "Could not load text.";
+    }
     }
 
     document.getElementById("defaultOpen").click();
+
   </script>
 
 </body>
