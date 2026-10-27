@@ -114,11 +114,15 @@
       history.pushState(null, "", "#" + tabName);
 
       if (tabName === "wearable") {
-        var timeResponse = await fetch("last_updated.txt?t=" + Date.now());
+        var timeResponse = await fetch(
+          "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/last_updated.txt?t=" + Date.now()
+        );
         document.getElementById("last-updated").textContent =
           "Last updated: " + await timeResponse.text();
 
-        var captionResponse = await fetch("output.txt?t=" + Date.now());
+        var captionResponse = await fetch(
+          "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/output.txt?t=" + Date.now()
+        );
         document.getElementById("captions").textContent =
           await captionResponse.text();
       }
