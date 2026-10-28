@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
 
 body {
-  font-family: 'Fira Code','Source Code Pro','JetBrains Mono', 'SF Mono', ui-monospace, 'Segoe UI Mono', monospace;
+  font-family: 'Source Code Pro','Fira Code','JetBrains Mono', 'SF Mono', ui-monospace, 'Segoe UI Mono', monospace;
   font-weight: 500;
   line-height: 1.6; 
   -webkit-font-smoothing: antialiased; 
@@ -36,7 +36,7 @@ h2 {
 button {
   background: none;
   font-family: inherit; 
-  font-weight: 550;
+  font-weight: 500;
   font-size: 17px;
   border: 1px solid black;
   padding: 15px;
