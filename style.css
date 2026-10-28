@@ -34,7 +34,6 @@
     }
 
     button {
-      font-family: "Courier New", Courier, monospace;
       background: none;
       font-size: 17px;
       border: none;
@@ -96,7 +95,7 @@
     }
 
     #captions {
-      font-size: 15px;
+      font-size: 13px;
       line-height: 1.65;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
