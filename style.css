@@ -26,14 +26,7 @@
       text-align: center;
       margin-top: 30px;
       padding:15px;
-    }
-
-    button {
-      font-family: monospace;
-      background: none;
-      font-size: 17px;
       border: none;
-      padding: 15px;
       margin: 0 10px;
       cursor: pointer;
       color: black;
@@ -46,6 +39,16 @@
       margin-left: auto;
       margin-right: auto;
     }
+    .tab:active{
+      box-shadow: 0 1px #0056b3;
+    }
+
+    button {
+      font-family: monospace;
+      background: none;
+      font-size: 17px;
+    }
+
         /* Top banner */
     .banner {
       display: flex;
