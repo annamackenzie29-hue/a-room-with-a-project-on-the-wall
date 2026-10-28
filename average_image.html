@@ -5,8 +5,6 @@
   <title>a room with a project on the wall</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="./style.css">
-  <style>
-  </style>
 </head>
 
 <body>
@@ -30,55 +28,64 @@
 
       <img
         id="average-image"
-        src="average_image.jpg"
+        src="https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/average_image.jpg"
         alt="Average image"
-        style="max-width: 100%; height: auto;"
+        style="max-width: 100%; height: auto; display: block;"
       >
     </div>
 
   </main>
 
-<script>
-  const url =
-    "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/";
+  <script>
+    const url =
+      "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/";
 
-  let previousTime = "";
+    let previousTime = "";
 
-  async function updateImage() {
-    try {
-      const timeResponse = await fetch(
-        url + "last_updated.txt?t=" + Date.now()
-      );
+    async function updateImage() {
+      try {
+        const timeResponse = await fetch(
+          url + "last_updated.txt?t=" + Date.now()
+        );
 
-      if (!timeResponse.ok) {
-        throw new Error("Could not load timestamp");
+        if (!timeResponse.ok) {
+          throw new Error("Could not load timestamp");
+        }
+
+        const time = (await timeResponse.text()).trim();
+
+        if (time !== previousTime) {
+          const newImageUrl =
+            url + "average_image.jpg?t=" + Date.now();
+
+          const testImage = new Image();
+
+          testImage.onload = function () {
+            document.getElementById("average-image").src =
+              newImageUrl;
+
+            document.getElementById("last-updated").textContent =
+              "Last updated: " + time;
+
+            previousTime = time;
+          };
+
+          testImage.onerror = function () {
+            console.error("Could not load average_image.jpg");
+          };
+
+          testImage.src = newImageUrl;
+        }
+
+      } catch (error) {
+        console.error("Error updating image:", error);
       }
-
-      const time = (await timeResponse.text()).trim();
-
-      // Only reload the image when the timestamp changes
-      if (time !== previousTime) {
-        const image = document.getElementById("average-image");
-
-        image.src = url + "average_image.jpg?t=" + Date.now();
-
-        document.getElementById("last-updated").textContent =
-          "Last updated: " + time;
-
-        previousTime = time;
-      }
-
-    } catch (error) {
-      console.error("Error updating image:", error);
     }
-  }
 
-  // Check immediately when the page opens
-  updateImage();
+    updateImage();
 
-  // Check for updates every 60 seconds
-  setInterval(updateImage, 60000);
-</script>
+    setInterval(updateImage, 60000);
+  </script>
 
 </body>
 </html>
