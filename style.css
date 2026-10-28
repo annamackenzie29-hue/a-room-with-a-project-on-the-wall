@@ -75,3 +75,29 @@
     .content {
       padding: 0 16px 30px;
     }
+
+    /* Captions */
+    .caption-column {
+      width: 100%;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    #last-updated {
+      font-size: 12px;
+      text-align: left;
+      margin: 0 0 14px;
+    }
+
+    #captions {
+      font-size: 15px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      text-align: left;
+      margin: 0;
+      padding: 12px;
+      border: 1px solid;
+      box-sizing: border-box;
+      width: 100%;
+    }
