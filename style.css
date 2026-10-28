@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Fira Code','Source Code Pro','JetBrains Mono', 'SF Mono', ui-monospace, 'Segoe UI Mono', monospace;
-  font-weight: 500; /* Extra weight to prevent that thin Courier feel */
+  font-weight: 600; /* Extra weight to prevent that thin Courier feel */
   line-height: 1.6; /* Adds clear spacing between text lines */
   -webkit-font-smoothing: antialiased; /* Renders strokes cleanly on macOS/iOS */
   -moz-osx-font-smoothing: grayscale;
@@ -35,7 +35,8 @@ h2 {
 
 button {
   background: none;
-  font-family: inherit; /* Ensures button inherits your monospaced font */
+  font-family: inherit; 
+  font-weight: 600;/* Ensures button inherits your monospaced font */
   font-size: 17px;
   border: 1px solid black;
   padding: 15px;
