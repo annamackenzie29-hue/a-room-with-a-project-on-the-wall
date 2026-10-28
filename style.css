@@ -26,7 +26,7 @@
       text-align: center;
       margin-top: 30px;
       padding:10px;
-    
+    }
 
     button {
       font-family: monospace;
@@ -45,7 +45,7 @@
       width: 50%;
       margin-left: auto;
       margin-right: auto;
-
+    }
         /* Top banner */
     .banner {
       display: flex;
@@ -76,5 +76,4 @@
     .content {
       padding: 0 16px 30px;
     }
-
 
