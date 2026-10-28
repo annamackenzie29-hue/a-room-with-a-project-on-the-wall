@@ -38,41 +38,47 @@
 
   </main>
 
-  <script>
-    const url =
-      "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/";
+<script>
+  const url =
+    "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/";
 
-    async function updateImage() {
-      try {
-        // Retrieve the last updated timestamp
-        const timeResponse = await fetch(
-          url + "last_updated.txt?t=" + Date.now()
-        );
+  let previousTime = "";
 
-        if (!timeResponse.ok) {
-          throw new Error("Could not load timestamp");
-        }
+  async function updateImage() {
+    try {
+      const timeResponse = await fetch(
+        url + "last_updated.txt?t=" + Date.now()
+      );
 
-        const time = (await timeResponse.text()).trim();
+      if (!timeResponse.ok) {
+        throw new Error("Could not load timestamp");
+      }
 
-        // Update the timestamp
-        document.getElementById("last-updated").textContent =
-          "Last updated: " + time;
+      const time = (await timeResponse.text()).trim();
 
-        // Retrieve the latest image
+      // Only reload the image when the timestamp changes
+      if (time !== previousTime) {
         const image = document.getElementById("average-image");
 
         image.src = url + "average_image.jpg?t=" + Date.now();
 
-      } catch (error) {
-        console.error("Error updating image:", error);
+        document.getElementById("last-updated").textContent =
+          "Last updated: " + time;
+
+        previousTime = time;
       }
+
+    } catch (error) {
+      console.error("Error updating image:", error);
     }
+  }
 
-    updateImage();
+  // Check immediately when the page opens
+  updateImage();
 
-    setInterval(updateImage, 60000);
-  </script>
+  // Check for updates every 60 seconds
+  setInterval(updateImage, 60000);
+</script>
 
 </body>
 </html>
