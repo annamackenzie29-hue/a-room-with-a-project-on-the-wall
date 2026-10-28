@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>a room with a project on the wall</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <style>
+  </style>
+</head>
+
+<body>
+
+  <header class="banner">
+    <a href="index.html" class="back-arrow" aria-label="Back to home">←</a>
+
+    <a href="index.html" class="banner-title">
+      A ROOM WITH A PROJECT ON THE WALL
+    </a>
+  </header>
+
+  <main class="content">
+
+    <h1>AVERAGE_IMAGE</h1>
+
+    <h2>(a painting of a green and blue background)</h2>
+
+    <div class="caption-column">
+      <p id="last-updated">Last updated: loading...</p>
+
+    </div>
+
+  </main>
+
+<script>
+  const url =
+    "https://raw.githubusercontent.com/annamackenzie29-hue/wearable_data/main/";
+
+  let previousTime = "";
+
+  async function updateImage() {
+    try {
+      const timeResponse = await fetch(
+        url + "last_updated.txt?t=" + Date.now()
+      );
+
+      if (!timeResponse.ok) {
+        throw new Error("Could not load timestamp");
+      }
+
+      const time = (await timeResponse.text()).trim();
+
+      // Only reload the image when the timestamp changes
+      if (time !== previousTime) {
+        const image = document.getElementById("average-image");
+
+        image.src = url + "average_image.jpg?t=" + Date.now();
+
+        document.getElementById("last-updated").textContent =
+          "Last updated: " + time;
+
+        previousTime = time;
+      }
+
+    } catch (error) {
+      console.error("Error updating image:", error);
+    }
+  }
+
+  // Check immediately when the page opens
+  updateImage();
+
+  // Check for updates every 60 seconds
+  setInterval(updateImage, 60000);
+</script>
+
+</body>
+</html>
