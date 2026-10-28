@@ -48,13 +48,7 @@
     }
         /* Top banner */
     .banner {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: #e5e5e5;
-      padding: 14px 16px;
-      width: 100%;
-      box-sizing: border-box;
+      justify-content: center;
     }
 
     .back-arrow {
