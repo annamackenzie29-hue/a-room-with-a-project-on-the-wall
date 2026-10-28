@@ -1,5 +1,10 @@
-    body {
-      font-family: "Courier New", Courier, monospace;
+
+   body {
+       font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', ui-monospace, 'Segoe UI Mono', monospace;
+       font-weight: 500; /* Extra weight to prevent that thin Courier feel */
+       line-height: 1.6; /* Adds clear spacing between text lines */
+      -webkit-font-smoothing: antialiased; /* Renders strokes cleanly on macOS/iOS */
+      -moz-osx-font-smoothing: grayscale;
       margin: 0;
       color: black;
       background: white;
